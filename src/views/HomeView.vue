@@ -52,6 +52,8 @@
                                                                                    required
                                                                                    v-model="student_name"
                                                                                    type="text"
+                                                                                   minlength="3"
+                                                                                   maxlength="50"
                                                                                    id="student-name"
                                                                                    name="student_name"
                                                                                    placeholder="Enter a Name..."></div>
@@ -92,6 +94,11 @@
 <script setup>
 import {reactive, ref} from 'vue'
 import axios from "axios";
+import router from "@/router";
+import {useResultsStore} from "@/stores/ResultsStore";
+
+const resultsStore = useResultsStore()
+
 
 let formData = reactive({
   level: '',
@@ -130,20 +137,22 @@ function getResults() {
   axios
       .postForm('/api', formDataCopy)
       .then((response) => {
-        // console.log(response)
         results.value = response.data.data
-        // console.log(results.value)
+
+        resultsStore.setResults(results.value)
+        loading.value = false
+        
+        router.push({
+          name: 'results',
+        })
+
 
       })
       .catch((error) => {
         console.log(error)
-
+        loading.value = false
       })
-
-  loading.value = false
 
 
 }
-
-
 </script>
