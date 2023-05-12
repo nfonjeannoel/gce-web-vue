@@ -15,8 +15,8 @@ const toggleHelp = () => {
   >
     <Navbar @toggleHelp="toggleHelp"/>
     <Transition name="slide-fade">
-      <section v-show="showHelp" class="bg-light pb-3" style="position: relative; z-index: 10">
-        <h1 class="text-center text-success" style="padding-top: 15px;padding-bottom: 15px;color: #1b6ce5!important;">
+      <section v-show="showHelp" class="bg-light pb-3 help-section" style="position: relative; z-index: 10">
+        <h1 class="text-center text-success" style="padding-top: 80px;padding-bottom: 15px;color: #333333!important;">
           FAQs</h1>
         <div class="container">
           <div class="row d-flex flex-column">
@@ -113,7 +113,9 @@ const toggleHelp = () => {
 </template>
 
 <style scoped>
-
+.help-section{
+  background: #E6F7FF !important;
+}
 .slide-fade-enter-active {
   transition: all 0.3s ease-out;
 }

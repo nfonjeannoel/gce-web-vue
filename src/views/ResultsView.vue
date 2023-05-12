@@ -1,11 +1,11 @@
 <template>
   <div class="full-container container" style="padding-top: 80px">
     <Transition>
-      <div class="overlay" v-if="showPopup">
+      <div class="overlay" @click.self="showPopup=false" v-if="showPopup">
         <ResultsDetails :result="details" @close="showPopup = false"/>
       </div>
     </Transition>
-    <div class="">
+    <div class="results-table">
       <div class="form-group py-md-3 py-1 row justify-content-center">
         <div class="col-lg-6">
           <div class="input-group">
@@ -14,7 +14,8 @@
               Back
             </button>
             <input type="text" v-model="searchText" class="search form-control" @input="updateSearchText"
-                   placeholder="Search name, school, center number ...">
+                   placeholder="Search name, school, center number ..."
+            >
             <button type="button" class="btn btn-outline-secondary">filters</button>
             <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -69,7 +70,7 @@
 
 <script setup>
 import {useResultsStore} from "@/stores/ResultsStore";
-import {computed, onBeforeMount, reactive, ref, watch, defineAsyncComponent} from "vue";
+import {computed, onBeforeMount, reactive, ref, watch, defineAsyncComponent, onMounted} from "vue";
 import {useRouter} from "vue-router";
 
 const router = useRouter()
@@ -89,6 +90,12 @@ let details = ref(null)
 //     router.push('/')
 //   }
 // })
+
+onMounted(() => {
+//  request focus on the search input
+  document.querySelector('.search').focus()
+
+})
 
 const emit = defineEmits(['toggleHelp'])
 
@@ -187,6 +194,18 @@ watch([() => {
 </script>
 
 <style scoped>
+.search::placeholder {
+  color: #333333;
+}
+
+input.search {
+  background-color: #E6F7FF;
+}
+
+.results-table {
+  color: #333333;
+}
+
 .overlay {
   position: fixed;
   width: 100%;

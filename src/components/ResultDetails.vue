@@ -1,6 +1,6 @@
 <template>
 
-  <div class="col-md-8 table-responsive results text-center min-vw-70">
+  <div class="col-md-8 table-responsive results text-center min-vw-70" style="z-index: 20">
     <table class="table table-bordered ">
       <tbody>
       <tr>
@@ -30,7 +30,7 @@
       </tbody>
 
     </table>
-    <button class="btn btn-outline-primary mb-3" @click="closeDetails"> Close</button>
+    <button class="btn btn-outline-primary mb-3 btn-close btn-lg" @click="closeDetails"></button>
 
   </div>
 
@@ -67,7 +67,7 @@ let getCenterName = computed(() => {
 
 <style scoped>
 .results {
-  background: white;
+  background: #E6F7FF;
 
 }
 </style>

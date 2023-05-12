@@ -46,4 +46,8 @@
   text-decoration: none;
 }
 
+footer{
+  background: #dcedf5 !important;
+}
+
 </style>

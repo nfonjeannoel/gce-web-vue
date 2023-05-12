@@ -1,12 +1,18 @@
 <template>
-  <div class="py-3 text-center text-white masthead d-flex align-items-center justify-content-center flex-grow-1"
-       style="background: radial-gradient(circle at 0.7% 1%, rgb(215, 248, 247) 0%, rgb(102, 188, 239) 100.2%)
-       no-repeat center center;background-size: cover;"
-  >
+  <div class="py-3 text-center text-white masthead d-flex align-items-center justify-content-center flex-grow-1">
     <div class="container mx-auto">
+
       <div class="row py-2">
+        <transition name="slide-fade">
+          <div v-show="errorMessage" @click="errorMessage = false"
+               class="col-md-10 col-lg-8 col-xl-7 mx-auto position-relative ">
+            <div class="alert alert-danger" role="alert">
+              We encountered an error. Please try again, check your network or retry later.
+            </div>
+          </div>
+        </transition>
         <div class="col-md-10 col-lg-8 col-xl-7 mx-auto position-relative ">
-          <h1 class="mb-5">Search for
+          <h1 class="mb-5 opt-title">Search for
             <select class="form-select" @change="changeTab">
               <option value="name">Student Name</option>
               <option value="number">Center number</option>
@@ -105,6 +111,7 @@ let formData = reactive({
 })
 
 let results = ref([])
+let errorMessage = ref(false)
 
 let student_name = ref('')
 let center_name = ref('')
@@ -150,6 +157,10 @@ function getResults() {
       .catch((error) => {
         console.log(error)
         loading.value = false
+        errorMessage.value = true
+        setTimeout(() => {
+          errorMessage.value = false
+        }, 9000)
       })
 
 
@@ -174,5 +185,9 @@ function getResults() {
 .slide-fade-leave-to {
   transform: translateY(-20px);
   opacity: 0;
+}
+
+.opt-title {
+  color: #333333;
 }
 </style>

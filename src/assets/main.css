@@ -1,7 +1,8 @@
 @import './base.css';
 
 body{
-    background: white;
+    background: #E6F7FF;
+    color: #333333;
 }
 /*d-flex align-items-center justify-content-center flex-grow-1*/
 
