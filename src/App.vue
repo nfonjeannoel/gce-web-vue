@@ -19,7 +19,7 @@ const toggleHelp = () => {
         <h1 class="text-center text-success" style="padding-top: 15px;padding-bottom: 15px;color: #1b6ce5!important;">
           FAQs</h1>
         <div class="container">
-          <div class="row">
+          <div class="row d-flex flex-column">
             <div class="col-md-6 offset-md-3">
               <div style="overflow: auto;">
                 <div id="faqlist" class="accordion accordion-flush">
@@ -96,13 +96,17 @@ const toggleHelp = () => {
                 </div>
               </div>
             </div>
+            <div class="d-flex justify-content-center pt-3">
+              <button class="btn btn-outline-primary btn-lg btn-close" @click="toggleHelp"></button>
+
+            </div>
           </div>
         </div>
       </section>
     </Transition>
-<!--    <div class="align-items-center justify-content-center flex-grow-1">-->
-      <RouterView @toggleHelp="toggleHelp"/>
-<!--    </div>-->
+    <!--    <div class="align-items-center justify-content-center flex-grow-1">-->
+    <RouterView @toggleHelp="toggleHelp"/>
+    <!--    </div>-->
     <Footer/>
   </div>
 

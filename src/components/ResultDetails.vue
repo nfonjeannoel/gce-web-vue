@@ -1,7 +1,7 @@
 <template>
 
-  <div class="col-md-8 table-responsive results text-center">
-    <table class="table  table-bordered ">
+  <div class="col-md-8 table-responsive results text-center min-vw-70">
+    <table class="table table-bordered ">
       <tbody>
       <tr>
         <td class="table-primary py-3 font-weight-bold" colspan="2">{{ result.student_name }}</td>

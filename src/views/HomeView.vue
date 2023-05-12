@@ -1,10 +1,10 @@
 <template>
-  <div class="text-center text-white masthead d-flex align-items-center justify-content-center flex-grow-1"
+  <div class="py-3 text-center text-white masthead d-flex align-items-center justify-content-center flex-grow-1"
        style="background: radial-gradient(circle at 0.7% 1%, rgb(215, 248, 247) 0%, rgb(102, 188, 239) 100.2%)
        no-repeat center center;background-size: cover;"
   >
     <div class="container mx-auto">
-      <div class="row">
+      <div class="row py-2">
         <div class="col-md-10 col-lg-8 col-xl-7 mx-auto position-relative ">
           <h1 class="mb-5">Search for
             <select class="form-select" @change="changeTab">

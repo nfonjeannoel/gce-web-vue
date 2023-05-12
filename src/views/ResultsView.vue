@@ -1,66 +1,69 @@
 <template>
-  <Transition>
-    <div class="overlay" v-if="showPopup">
-      <ResultsDetails :result="details" @close="showPopup = false"/>
-    </div>
-  </Transition>
-  <div class="container">
-    <div class="form-group py-md-3 py-1 row justify-content-center">
-      <div class="col-lg-6">
-        <div class="input-group">
-          <button @click="router.back()" type="button" class="btn btn-outline-secondary"><i class="fa fa-backward"></i>
-            Go back
-          </button>
-          <input type="text" v-model="searchText" class="search form-control" @input="updateSearchText"
-                 placeholder="Search name, school, center number ...">
-          <button type="button" class="btn btn-outline-secondary">filters</button>
-          <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
-                  data-bs-toggle="dropdown" aria-expanded="false">
-            <span class="visually-hidden">Toggle Dropdown</span>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="#" @click.prevent="sortByNames">Sort Names</a></li>
-            <li><a class="dropdown-item" href="#" @click.prevent="sortByPapers">Sort Papers</a></li>
-            <li><a class="dropdown-item" href="#" @click.prevent="sortBySchool">Sort School</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="#" @click.prevent="clearFilters">Clear Filters</a></li>
-          </ul>
+  <div class="full-container container" style="padding-top: 80px">
+    <Transition>
+      <div class="overlay" v-if="showPopup">
+        <ResultsDetails :result="details" @close="showPopup = false"/>
+      </div>
+    </Transition>
+    <div class="">
+      <div class="form-group py-md-3 py-1 row justify-content-center">
+        <div class="col-lg-6">
+          <div class="input-group">
+            <button @click="router.back()" type="button" class="btn btn-outline-secondary"><i
+                class="fa fa-backward"></i>
+              Back
+            </button>
+            <input type="text" v-model="searchText" class="search form-control" @input="updateSearchText"
+                   placeholder="Search name, school, center number ...">
+            <button type="button" class="btn btn-outline-secondary">filters</button>
+            <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="visually-hidden">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="#" @click.prevent="sortByNames">Sort Names</a></li>
+              <li><a class="dropdown-item" href="#" @click.prevent="sortByPapers">Sort Papers</a></li>
+              <li><a class="dropdown-item" href="#" @click.prevent="sortBySchool">Sort School</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#" @click.prevent="clearFilters">Clear Filters</a></li>
+            </ul>
+
+          </div>
 
         </div>
-
       </div>
-    </div>
 
-    <div class="table-responsive">
-      <table class="table table-hover table-bordered results">
-        <thead class="text-nowrap">
-        <tr>
-          <th>#</th>
-          <th class="col-md-5 col-xs-5">Name</th>
-          <th class="col-md-4 col-xs-4">Papers Passed</th>
-          <th class="col-md-3 col-xs-3">Grades</th>
-        </tr>
-        <tr class="warning no-result text-center" v-if="noResults">
-          <td colspan="4"><i class="fa fa-warning"></i> No results match your query. <a @click="toggleHelp" href="#">Need
-            help?</a></td>
-        </tr>
-        </thead>
-        <tbody class="text-nowrap">
-        <tr v-for="(result, index) in results" :key="result.record_id"
-            @click="handlePopup(result)">
-          <th scope="row">{{ index + 1 }}</th>
-          <td>{{ result.student_name }}</td>
-          <td>{{ result.papers_passed }}</td>
-          <td>{{ result.student_grades }}</td>
-          <td hidden> {{ result.center_name }}</td>
-          <td hidden> {{ result.center_number }}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+      <div class="table-responsive">
+        <table class="table table-hover table-bordered results">
+          <thead class="text-nowrap">
+          <tr>
+            <th>#</th>
+            <th class="col-md-5 col-xs-5">Name</th>
+            <th class="col-md-4 col-xs-4">Papers Passed</th>
+            <th class="col-md-3 col-xs-3">Grades</th>
+          </tr>
+          <tr class="warning no-result text-center" v-if="noResults">
+            <td colspan="4"><i class="fa fa-warning"></i> No results match your query. <a @click="toggleHelp" href="#">Need
+              help?</a></td>
+          </tr>
+          </thead>
+          <tbody class="text-nowrap">
+          <tr v-for="(result, index) in results" :key="result.record_id"
+              @click="handlePopup(result)">
+            <th scope="row">{{ index + 1 }}</th>
+            <td>{{ result.student_name }}</td>
+            <td>{{ result.papers_passed }}</td>
+            <td>{{ result.student_grades }}</td>
+            <td hidden> {{ result.center_name }}</td>
+            <td hidden> {{ result.center_number }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
 
+    </div>
   </div>
 </template>
 

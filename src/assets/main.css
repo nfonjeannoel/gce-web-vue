@@ -3,3 +3,11 @@
 body{
     background: white;
 }
+/*d-flex align-items-center justify-content-center flex-grow-1*/
+
+.full-container{
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    flex-grow: 1;
+}
