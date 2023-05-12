@@ -1,12 +1,11 @@
 <template>
-  <header class="text-center text-white masthead"
-          style="background: radial-gradient(circle at 0.7% 1%, rgb(215, 248, 247) 0%, rgb(102, 188, 239) 100.2%)
-             no-repeat center center;background-size: cover;"
+  <div class="text-center text-white masthead d-flex align-items-center justify-content-center flex-grow-1"
+       style="background: radial-gradient(circle at 0.7% 1%, rgb(215, 248, 247) 0%, rgb(102, 188, 239) 100.2%)
+       no-repeat center center;background-size: cover;"
   >
-    <div class="overlay"></div>
-    <div class="container">
+    <div class="container mx-auto">
       <div class="row">
-        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto position-relative">
+        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto position-relative ">
           <h1 class="mb-5">Search for
             <select class="form-select" @change="changeTab">
               <option value="name">Student Name</option>
@@ -88,7 +87,7 @@
         </div>
       </div>
     </div>
-  </header>
+  </div>
 </template>
 
 <script setup>
@@ -141,7 +140,7 @@ function getResults() {
 
         resultsStore.setResults(results.value)
         loading.value = false
-        
+
         router.push({
           name: 'results',
         })
@@ -156,3 +155,24 @@ function getResults() {
 
 }
 </script>
+
+<style scoped>
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+.slide-fade-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+</style>

@@ -3,7 +3,7 @@ import {defineStore} from 'pinia'
 export const useResultsStore = defineStore('ResultsStore', {
     state: () => {
         return {
-            results: 'jean'
+            results: null
         }
     },
 

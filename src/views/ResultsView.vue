@@ -1,8 +1,16 @@
 <template>
+  <Transition>
+    <div class="overlay" v-if="showPopup">
+      <ResultsDetails :result="details" @close="showPopup = false"/>
+    </div>
+  </Transition>
   <div class="container">
     <div class="form-group py-md-3 py-1 row justify-content-center">
       <div class="col-lg-6">
         <div class="input-group">
+          <button @click="router.back()" type="button" class="btn btn-outline-secondary"><i class="fa fa-backward"></i>
+            Go back
+          </button>
           <input type="text" v-model="searchText" class="search form-control" @input="updateSearchText"
                  placeholder="Search name, school, center number ...">
           <button type="button" class="btn btn-outline-secondary">filters</button>
@@ -35,7 +43,8 @@
           <th class="col-md-3 col-xs-3">Grades</th>
         </tr>
         <tr class="warning no-result text-center" v-if="noResults">
-          <td colspan="4"><i class="fa fa-warning"></i> No results match your query. <a @click="toggleHelp" href="#">Need help?</a></td>
+          <td colspan="4"><i class="fa fa-warning"></i> No results match your query. <a @click="toggleHelp" href="#">Need
+            help?</a></td>
         </tr>
         </thead>
         <tbody class="text-nowrap">
@@ -57,18 +66,31 @@
 
 <script setup>
 import {useResultsStore} from "@/stores/ResultsStore";
-import {computed, onBeforeMount, reactive, ref, watch, defineEmits} from "vue";
+import {computed, onBeforeMount, reactive, ref, watch, defineAsyncComponent} from "vue";
+import {useRouter} from "vue-router";
 
+const router = useRouter()
+
+const ResultsDetails = defineAsyncComponent(() => import('../components/ResultDetails.vue'))
 const resultsStore = useResultsStore()
 const results = ref(null)
 let searchText = ref('')
+let showPopup = ref(false)
+let details = ref(null)
+
+// onBeforeMount(() => {
+//   console.log('results store')
+//   console.log(resultsStore.results)
+//   if (!resultsStore.results) {
+//     //  navigate to the home page
+//     router.push('/')
+//   }
+// })
 
 const emit = defineEmits(['toggleHelp'])
 
 onBeforeMount(() => {
   results.value = resultsStore.results
-  // console.log("Results")
-  // console.log(results.value)
 })
 
 let filters = reactive({
@@ -77,6 +99,8 @@ let filters = reactive({
 })
 
 function handlePopup(result) {
+  showPopup.value = true
+  details.value = result
 }
 
 const toggleHelp = () => {
@@ -160,5 +184,35 @@ watch([() => {
 </script>
 
 <style scoped>
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  min-width: 50%;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.5);;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+
+.modal > div {
+  background: #fff;
+  border-radius: 10px;
+  padding: 50px;
+}
+
+/* we will explain what these classes do next! */
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
 </style>

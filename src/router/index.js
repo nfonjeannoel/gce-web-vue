@@ -1,7 +1,10 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import AboutView from '../views/AboutView.vue'
+import AboutView from '../components/About.vue'
 import ResultsView from '../views/ResultsView.vue'
+import Contact from '../components/Contact.vue'
+import Terms from '../components/Terms.vue'
+import Privacy from '../components/Privacy.vue'
 
 
 const router = createRouter({
@@ -24,7 +27,33 @@ const router = createRouter({
             path: '/results',
             name: 'results',
             component: ResultsView,
-            props: true
+            beforeEnter: (to, from, next) => {
+                if (from.name !== 'home') {
+                    next({name: 'home'})
+                } else {
+                    next()
+                }
+            }
+        },
+        {
+            path: '/terms-of-use',
+            name: 'terms',
+            component: Terms
+        },
+        {
+            path: '/contact',
+            name: 'contact',
+            component: Contact
+        },
+        {
+            path: '/privacy-policy',
+            name: 'privacy',
+            component: Privacy
+        },
+        //    redirect to home if no route matches
+        {
+            path: '/:pathMatch(.*)*',
+            redirect: {name: 'home'}
         }
     ]
 })
