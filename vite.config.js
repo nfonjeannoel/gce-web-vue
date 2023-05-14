@@ -19,5 +19,5 @@ export default defineConfig({
             }
         }
     },
-    base: '/gce-web-vue/'
+    // base: '/gce-web-vue/'
 })
