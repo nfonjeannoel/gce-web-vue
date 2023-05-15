@@ -1,2 +1,3 @@
 # Netlify settings for single-page application
+/api/* https://jean.tdev-hub.space/fetch-result.php/:splat 200
 /*    /index.html   200
