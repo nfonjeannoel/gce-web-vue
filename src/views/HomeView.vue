@@ -141,7 +141,7 @@ function getResults() {
     // console.log("opt school", formDataCopy)
   }
   axios
-      .postForm('https://jean.tdev-hub.space/fetch-result.php', formDataCopy)
+      .postForm('/api', formDataCopy)
       .then((response) => {
         results.value = response.data.data
 
