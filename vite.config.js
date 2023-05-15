@@ -15,7 +15,9 @@ export default defineConfig({
         proxy: {
             '/api': {
                 target: 'https://jean.tdev-hub.space/fetch-result.php',
-                changeOrigin: true
+                changeOrigin: true,
+                secure: false,
+                rewrite: (path) => path.replace(/^\/api/, ""),
             }
         }
     },
