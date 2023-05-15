@@ -152,6 +152,8 @@ function getResults() {
         resultsStore.setResults(results.value)
         loading.value = false
 
+        localStorage.setItem("searchResults", JSON.stringify(results.value));
+
         router.push({
           name: 'results',
         })

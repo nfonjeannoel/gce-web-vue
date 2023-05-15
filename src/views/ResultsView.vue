@@ -100,7 +100,18 @@ onMounted(() => {
 const emit = defineEmits(['toggleHelp'])
 
 onBeforeMount(() => {
-  results.value = resultsStore.results
+  if (results.value) {
+
+    results.value = resultsStore.results
+
+  } else {
+    const searchResults = localStorage.getItem('searchResults')
+    if (searchResults) {
+      results.value = JSON.parse(searchResults)
+    }
+  }
+//  check if results are avialable in local storage
+
 })
 
 let filters = reactive({
@@ -154,6 +165,7 @@ watch([() => {
 
   // Filter the results based on the search text
   if (filters.searchText) {
+    filters.searchText = filters.searchText.trim()
     filteredResults = filteredResults.filter(result => {
       return result.student_name.toLowerCase().includes(filters.searchText.toLowerCase()) ||
           result.center_name.toLowerCase().includes(filters.searchText.toLowerCase()) ||

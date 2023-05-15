@@ -29,7 +29,16 @@ const router = createRouter({
             component: ResultsView,
             beforeEnter: (to, from, next) => {
                 if (from.name !== 'home') {
-                    next({name: 'home'})
+
+                    const searchResults = localStorage.getItem('searchResults');
+                    if (searchResults) {
+                        // Pass the stored search results as props to the ResultsView component
+                        to.params.results = JSON.parse(searchResults);
+                        next()
+                    } else {
+                        next({name: 'home'})
+                    }
+
                 } else {
                     next()
                 }
