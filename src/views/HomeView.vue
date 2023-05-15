@@ -24,7 +24,36 @@
           <form @submit.prevent="getResults" id="search-form">
             <!--            <input type="hidden" name="opt" value="7">-->
             <div class="row">
-              <div class="col-12 col-md-6 mb-4 ">
+
+              <div v-if="activeTab === 'name'" class="col-12  mb-4"><input class="form-control"
+                                                                                   required
+                                                                                   v-model="student_name"
+                                                                                   type="text"
+                                                                                   minlength="3"
+                                                                                   maxlength="50"
+                                                                                   id="student-name"
+                                                                                   name="student_name"
+                                                                                   placeholder="Enter a Name..."></div>
+              <div v-else-if="activeTab === 'number'" class="col-12  mb-4"><input
+                  class="form-control"
+                  v-model="center_number"
+                  required
+                  maxlength="5"
+                  minlength="5"
+                  type="text"
+                  name="center_number"
+                  placeholder="Enter a Center Number..."></div>
+              <div v-else class="col-12 col-md-6 mb-4"><input class="form-control"
+                                                              required
+                                                              type="text"
+                                                              minlength="4"
+                                                              maxlength="100"
+                                                              v-model="center_name"
+                                                              name="center_name"
+                                                              placeholder="Enter a School Name"></div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-md-6 mb-4">
 
                 <select name="level" id="level-options" class="form-select" required v-model="formData.level">
                   <option value="" disabled>Select a level...</option>
@@ -41,6 +70,7 @@
                        v-model="formData.year"
                        maxlength="4"
                        minlength="4"
+                       min="2019"
                        list="year-options-list"
                        required
                        placeholder="Enter a year...">
@@ -53,37 +83,11 @@
               </div>
             </div>
             <div class="row">
-              <div v-if="activeTab === 'name'" class="col-12 col-md-9 mb-4"><input class="form-control form-control-lg"
-                                                                                   required
-                                                                                   v-model="student_name"
-                                                                                   type="text"
-                                                                                   minlength="3"
-                                                                                   maxlength="50"
-                                                                                   id="student-name"
-                                                                                   name="student_name"
-                                                                                   placeholder="Enter a Name..."></div>
-              <div v-else-if="activeTab === 'number'" class="col-12 col-md-9 mb-4"><input
-                  class="form-control form-control-lg"
-                  v-model="center_number"
-                  required
-                  maxlength="5"
-                  minlength="5"
-                  type="text"
-                  name="center_number"
-                  placeholder="Enter a Center Number..."></div>
-              <div v-else class="col-12 col-md-9 mb-4"><input class="form-control form-control-lg"
-                                                              required
-                                                              type="text"
-                                                              minlength="4"
-                                                              maxlength="100"
-                                                              v-model="center_name"
-                                                              name="center_name"
-                                                              placeholder="Enter a School Name"></div>
-              <div class="col-12 col-md-3">
-                <button v-if="loading" class="btn btn-primary btn-lg .text-light" type="button" disabled>
+              <div class="col-12">
+                <button v-if="loading" class="btn btn-primary text-light" type="button" disabled>
                   <span class="spinner-grow spinner-grow-sm text-light" role="status" aria-hidden="true"></span>
                 </button>
-                <button v-else class="btn btn-primary btn-lg" type="submit"><i
+                <button v-else class="btn btn-primary" type="submit"><i
                     class="fa fa-search pe-2"></i>
                   Search
                 </button>
