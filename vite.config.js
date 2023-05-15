@@ -16,8 +16,8 @@ export default defineConfig({
             '/api': {
                 target: 'https://jean.tdev-hub.space/fetch-result.php',
                 changeOrigin: true,
-                secure: false,
-                rewrite: (path) => path.replace(/^\/api/, ""),
+                // secure: false,
+                // rewrite: (path) => path.replace(/^\/api/, ""),
             }
         }
     },
