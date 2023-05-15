@@ -100,16 +100,15 @@ onMounted(() => {
 const emit = defineEmits(['toggleHelp'])
 
 onBeforeMount(() => {
-  if (results.value) {
 
-    results.value = resultsStore.results
-
+  const searchResults = localStorage.getItem('searchResults')
+  if (searchResults) {
+    results.value = JSON.parse(searchResults)
+    resultsStore.results = results.value
   } else {
-    const searchResults = localStorage.getItem('searchResults')
-    if (searchResults) {
-      results.value = JSON.parse(searchResults)
-    }
+    results.value = resultsStore.results
   }
+
 //  check if results are avialable in local storage
 
 })
