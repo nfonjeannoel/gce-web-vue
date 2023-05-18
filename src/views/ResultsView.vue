@@ -224,7 +224,7 @@ input.search {
   min-width: 50%;
   left: 0;
   top: 0;
-  background: rgba(0, 0, 0, 0.5);;
+  background: rgba(220, 237, 245, 0.5);
   z-index: 10;
   display: flex;
   justify-content: center;

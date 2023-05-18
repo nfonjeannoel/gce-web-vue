@@ -21,6 +21,6 @@ const toggleHelp = () => {
 
 <style scoped>
 nav{
-  background: #b4c4cc;
+  background: #dcedf5 !important;
 }
 </style>
