@@ -25,8 +25,8 @@
         <ul class="list-inline mb-0">
           <li class="list-inline-item"><a target="_blank" href="https://www.facebook.com/gceresultsapp"><i
               class="fa fa-facebook fa-2x fa-fw"></i></a></li>
-          <li class="list-inline-item"><a target="_blank" href="#"><i class="fa fa-twitter fa-2x fa-fw"></i></a></li>
-          <li class="list-inline-item"><a target="_blank" href="#"><i class="fa fa-instagram fa-2x fa-fw"></i></a></li>
+          <li class="list-inline-item"><a  href="#"><i class="fa fa-twitter fa-2x fa-fw"></i></a></li>
+          <li class="list-inline-item"><a  href="#"><i class="fa fa-instagram fa-2x fa-fw"></i></a></li>
         </ul>
       </div>
     </div>

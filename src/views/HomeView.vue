@@ -7,7 +7,7 @@
           <div v-show="errorMessage" @click="errorMessage = false"
                class="col-md-10 col-lg-8 col-xl-7 mx-auto position-relative ">
             <div class="alert alert-danger" role="alert">
-              We encountered an error. Please try again, check your network or retry later.
+              {{ error_text }}
             </div>
           </div>
         </transition>
@@ -26,14 +26,14 @@
             <div class="row">
 
               <div v-if="activeTab === 'name'" class="col-12  mb-4"><input class="form-control"
-                                                                                   required
-                                                                                   v-model="student_name"
-                                                                                   type="text"
-                                                                                   minlength="3"
-                                                                                   maxlength="50"
-                                                                                   id="student-name"
-                                                                                   name="student_name"
-                                                                                   placeholder="Enter a Name..."></div>
+                                                                           required
+                                                                           v-model="student_name"
+                                                                           type="text"
+                                                                           minlength="3"
+                                                                           maxlength="50"
+                                                                           id="student-name"
+                                                                           name="student_name"
+                                                                           placeholder="Enter a Name..."></div>
               <div v-else-if="activeTab === 'number'" class="col-12  mb-4"><input
                   class="form-control"
                   v-model="center_number"
@@ -43,14 +43,14 @@
                   type="text"
                   name="center_number"
                   placeholder="Enter a Center Number..."></div>
-              <div v-else class="col-12 col-md-6 mb-4"><input class="form-control"
-                                                              required
-                                                              type="text"
-                                                              minlength="4"
-                                                              maxlength="100"
-                                                              v-model="center_name"
-                                                              name="center_name"
-                                                              placeholder="Enter a School Name"></div>
+              <div v-else class="col-12  mb-4"><input class="form-control"
+                                                      required
+                                                      type="text"
+                                                      minlength="4"
+                                                      maxlength="100"
+                                                      v-model="center_name"
+                                                      name="center_name"
+                                                      placeholder="Enter a School Name"></div>
             </div>
             <div class="row">
               <div class="col-12 col-md-6 mb-4">
@@ -116,6 +116,7 @@ let formData = reactive({
 
 let results = ref([])
 let errorMessage = ref(false)
+let error_text = ref('')
 
 let student_name = ref('')
 let center_name = ref('')
@@ -144,13 +145,24 @@ function getResults() {
     formDataCopy.opt = "8"
     // console.log("opt school", formDataCopy)
   }
+  // if year is greater than 2022, or less than 2019, we do not yet have results for that year. display a warning
+  if (formDataCopy.year > 2022 || formDataCopy.year < 2019) {
+    loading.value = false
+    errorMessage.value = true
+    error_text.value = `Oops!! results for the year ${formDataCopy.year} are on the way. Available years: 2019-2022`
+    setTimeout(() => {
+      errorMessage.value = false
+    }, 9000)
+    return
+  }
   axios
-      .postForm('/api', formDataCopy)
+      .postForm('https://jean.tdev-hub.space/fetch-result.php', formDataCopy)
       .then((response) => {
         results.value = response.data.data
 
         resultsStore.setResults(results.value)
         loading.value = false
+        // console.log("results", response.data)
 
         localStorage.setItem("searchResults", JSON.stringify(results.value));
 
@@ -164,6 +176,7 @@ function getResults() {
         console.log(error)
         loading.value = false
         errorMessage.value = true
+        error_text.value = "We encountered an error. Please try again, check your network or retry later."
         setTimeout(() => {
           errorMessage.value = false
         }, 9000)
